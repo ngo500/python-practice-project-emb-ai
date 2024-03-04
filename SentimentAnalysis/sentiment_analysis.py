@@ -1,4 +1,6 @@
-import requests, json
+""" function that sends data to Watson NLP BERT for sentiment analysis """
+import json
+import requests
 
 def sentiment_analyzer(text_to_analyse):
     """
@@ -6,12 +8,11 @@ def sentiment_analyzer(text_to_analyse):
     returns:
     formatted label and score from Watson NLP
     """
-    #store info to be sent to Watson NLP for sentiment analysis 
     url = 'https://sn-watson-sentiment-bert.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/SentimentPredict'
     myobj = { "raw_document" : { "text" : text_to_analyse } }
     header = { "grpc-metadata-mm-model-id" : "sentiment_aggregated-bert-workflow_lang_multi_stock" }
     #send info over POST request and store response
-    response = requests.post(url, json = myobj, headers = header)
+    response = requests.post(url, json = myobj, headers = header, timeout = 10)
     #formated response as json, dictionary of dictionaries
     formatted_response = json.loads(response.text)
 
@@ -27,6 +28,5 @@ def sentiment_analyzer(text_to_analyse):
         #status not 200, generic error
         label = None
         score = None
-    
     #return the label and score from the response
-    return { 'label' : label, 'score' : score } 
+    return { 'label' : label, 'score' : score }
