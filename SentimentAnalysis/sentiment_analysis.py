@@ -14,7 +14,19 @@ def sentiment_analyzer(text_to_analyse):
     response = requests.post(url, json = myobj, headers = header)
     #formated response as json, dictionary of dictionaries
     formatted_response = json.loads(response.text)
-    label = formatted_response['documentSentiment']['label']
-    score = formatted_response['documentSentiment']['score']
+
+    if response.status_code == 200:
+        #if status 200/OK, store info
+        label = formatted_response['documentSentiment']['label']
+        score = formatted_response['documentSentiment']['score']
+    elif response.status_code == 500:
+        #elif status 500/error, store None
+        label = None
+        score = None
+    else:
+        #status not 200, generic error
+        label = None
+        score = None
+    
     #return the label and score from the response
     return { 'label' : label, 'score' : score } 

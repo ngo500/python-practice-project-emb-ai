@@ -18,7 +18,13 @@ def sent_analyzer():
     response = sentiment_analyzer(text_to_analyze)
     label = response['label']
     score = response['score']
-    return "The text is {} and has a score of {}!".format(label.split('_')[1], score)
+
+    if label is None:
+        #label is None, invalid input error
+        return "Text input is invalid. Please enter valid text."
+    else:
+        #label is valid, print the info out
+        return "The text is {} and has a score of {}!".format(label.split('_')[1], score)
 
 @app.route("/")
 def render_index_page():
