@@ -19,6 +19,9 @@ def sent_analyzer():
     label = response['label']
     score = response['score']
 
+    if label == "empty":
+        #label is empty, ask for input
+        return "No text was input. Please enter valid text."
     if label is None:
         #label is None, invalid input error
         return "Text input is invalid. Please enter valid text."
