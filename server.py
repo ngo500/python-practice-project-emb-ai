@@ -22,19 +22,18 @@ def sent_analyzer():
     if label is None:
         #label is None, invalid input error
         return "Text input is invalid. Please enter valid text."
-    else:
-        #label is valid, print the info out
-        return "The text is {} and has a score of {}!".format(label.split('_')[1], score)
+
+    #else, label is valid, print the info out
+    return f"The text is {(label.split('_')[1])} and has a score of {score}!"
 
 @app.route("/")
 def render_index_page():
-    ''' This function initiates the rendering of the main application
-        page over the Flask channel
+    ''' 
+    This function initiates the rendering of the main application
+    page over the Flask channel
     '''
     return render_template('index.html')
 
 if __name__ == "__main__":
-    ''' This functions executes the flask app and deploys it on localhost:5000
-    '''
+    #executes the flask app and deploys it on localhost:5000
     app.run(host = "0.0.0.0", port = 5000)
-
