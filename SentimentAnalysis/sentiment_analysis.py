@@ -17,4 +17,4 @@ def sentiment_analyzer(text_to_analyse):
     label = formatted_response['documentSentiment']['label']
     score = formatted_response['documentSentiment']['score']
     #return the label and score from the response
-    return { 'label' : label, 'score' : score }
+    return { 'label' : label, 'score' : score } 
